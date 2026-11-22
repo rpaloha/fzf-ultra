@@ -25,7 +25,7 @@ systemctl --user daemon-reload
 systemctl --user enable --now fzf-ultra.service
 ```
 
-Bind a compositor hotkey to `~/.local/bin/fzf-ultra toggle` (expand the home path if the compositor requires it). The first invocation also starts the daemon if it is not running. Use `fzf-ultra show` or `fzf-ultra hide` for explicit control.
+Run `~/.local/bin/fzf-ultra toggle` to try the launcher. The first invocation also starts the daemon if needed. Use `show` or `hide` for explicit control.
 
 Theme override: copy `assets/style.css` to `~/.config/fzf-ultra/style.css` and edit it. The service can be disabled with `systemctl --user disable --now fzf-ultra.service`.
 
@@ -52,6 +52,42 @@ Pressing Escape cancels with exit status 1 and no output.
 
 The station names are sample data. To play a station, a calling script uses
 the selected line to look up a stream URL and passes it to a player such as mpv.
+
+## Video picker with mpv
+
+The example script recursively lists local videos, opens the selected file
+in mpv, and exits without playing anything if you cancel. It requires Bash,
+`find`, `sort`, and `mpv`.
+
+```sh
+install -Dm755 examples/fzf-ultra-videos ~/.local/bin/fzf-ultra-videos
+~/.local/bin/fzf-ultra-videos
+```
+
+The default folder is `~/Videos`. To use another folder, pass it as the first
+argument, for example `~/.local/bin/fzf-ultra-videos "$HOME/Movies"`.
+
+## Keyboard shortcuts
+
+The launcher has no global shortcut of its own. In your compositor's keybinding
+settings, choose an available shortcut and bind it to one of these commands.
+Use a full path if the compositor does not expand `~` or include `~/.local/bin`
+in its search path.
+
+| Action | Command |
+| --- | --- |
+| Toggle the app launcher | `~/.local/bin/fzf-ultra toggle` |
+| Open the video picker | `~/.local/bin/fzf-ultra-videos` |
+
+For example, in MangoWC, replace `/home/YOUR_USER` with your actual home
+directory and reload the compositor configuration:
+
+```ini
+bind=SUPER,space,spawn,/home/YOUR_USER/.local/bin/fzf-ultra toggle
+bind=ALT,v,spawn,/home/YOUR_USER/.local/bin/fzf-ultra-videos
+```
+
+Both commands also work from a terminal in the Wayland session.
 
 ## License
 

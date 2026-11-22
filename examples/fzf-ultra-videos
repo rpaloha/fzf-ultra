@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+video_dir=${1:-"$HOME/Videos"}
+video_dir=${video_dir%/}
+video_dir=${video_dir:-/}
+[[ "$video_dir" = /* ]] || video_dir="$PWD/$video_dir"
+video_prefix="${video_dir%/}/"
+show_error() { printf '%s\n' "$1" | "$HOME/.local/bin/fzf-ultra" --dmenu --placeholder "Videos: error" >/dev/null; }
+
+if [[ ! -d "$video_dir" ]]; then
+    show_error "Directory not found: $video_dir"
+    exit 1
+fi
+
+mapfile -d '' videos < <(
+    find "$video_dir" -type f \
+        \( -iname '*.mkv' -o -iname '*.mp4' -o -iname '*.webm' \
+        -o -iname '*.avi' -o -iname '*.mov' -o -iname '*.m4v' \
+        -o -iname '*.mpeg' -o -iname '*.mpg' -o -iname '*.wmv' \) \
+        -print0 | sort -z
+)
+
+if ((${#videos[@]} == 0)); then
+    show_error "No videos found in $video_dir"
+    exit 0
+fi
+
+labels=()
+for video in "${videos[@]}"; do
+    label=${video#"$video_prefix"}
+    [[ "$label" != *$'\n'* && "$label" != *$'\r'* ]] || continue
+    labels+=("$label")
+done
+
+if ((${#labels[@]} == 0)); then
+    show_error "No selectable videos found in $video_dir"
+    exit 0
+fi
+
+selected=$(printf '%s\n' "${labels[@]}" | "$HOME/.local/bin/fzf-ultra" --dmenu --placeholder "Videos") || exit 0
+[[ -n "$selected" ]] || exit 0
+
+for video in "${videos[@]}"; do
+    if [[ "${video#"$video_prefix"}" == "$selected" ]]; then
+        exec mpv -- "$video"
+    fi
+done
