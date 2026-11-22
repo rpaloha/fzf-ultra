@@ -1,0 +1,14 @@
+[package]
+name = "fzf-ultra"
+version = "0.2.0"
+edition = "2024"
+description = "A tiny daemon-backed Wayland launcher with fzf-style search"
+license = "MIT"
+
+[dependencies]
+gio = "0.22"
+glib = "0.22"
+gtk = { package = "gtk4", version = "0.11" }
+gtk4-layer-shell = "0.8.1"
+futures-channel = "0.3"
+futures-util = { version = "0.3", default-features = false }

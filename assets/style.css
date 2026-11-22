@@ -1,0 +1,74 @@
+* {
+  font-family: "Adwaita Sans", sans-serif;
+  color: #edf2fa;
+}
+
+.launcher-window {
+  background: transparent;
+}
+
+.launcher {
+  padding: 10px;
+  border: 1px solid rgba(115, 218, 202, 0.34);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(24, 28, 40, 0.985), rgba(14, 17, 25, 0.985));
+}
+
+.search {
+  min-height: 46px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 21px;
+  caret-color: #73daca;
+}
+
+.search selection { background-color: #315064; }
+
+.search:focus {
+  border-color: rgba(115, 218, 202, 0.5);
+}
+
+.results {
+  margin-top: 9px;
+  background: transparent;
+}
+
+.result-row {
+  min-height: 36px;
+  margin: 2px 0;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.result-row:selected {
+  border-color: rgba(115, 218, 202, 0.3);
+  background: linear-gradient(100deg, rgba(42, 68, 88, 0.94), rgba(34, 48, 68, 0.94));
+}
+
+.app-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.app-description {
+  color: #9aa5b8;
+  font-size: 13px;
+}
+
+.footer {
+  margin: 8px 4px 1px;
+  color: #8992a5;
+  font-size: 12px;
+}
+
+.no-results {
+  padding: 24px;
+  color: #8992a5;
+  font-size: 16px;
+}
+
+scrollbar { opacity: 0; }
