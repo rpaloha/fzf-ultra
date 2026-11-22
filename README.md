@@ -39,17 +39,19 @@ printf 'Firefox\nHelium\nmpv\n' | fzf-ultra --filter fi
 
 ## Interactive stdin menu
 
+Pass one item per line to `fzf-ultra --dmenu`. This example opens a picker
+with two sample station names and displays “Radio” in the search field:
+
 ```sh
-printf 'Stacja A\nStacja B\n' | fzf-ultra --dmenu --placeholder 'Radio'
+printf '%s\n' 'Station A' 'Station B' | fzf-ultra --dmenu --placeholder 'Radio'
 ```
 
-The resident daemon displays the list and returns the selected line on stdout.
-Escape (or `fzf-ultra hide`) cancels with exit status 1 and empty stdout.
-The menu uses the same fuzzy search and keyboard controls as the app picker.
+Type to filter, use the arrow keys to choose an item, and press Enter.
+Choosing **Station B** prints `Station B` to the terminal (stdout).
+Pressing Escape cancels with exit status 1 and no output.
 
-Use this mode from scripts that present a list of radio stations, videos, or
-other actions. Pipe a newline-delimited list to the menu and use the selected
-line as the action's input.
+The station names are sample data. To play a station, a calling script uses
+the selected line to look up a stream URL and passes it to a player such as mpv.
 
 ## License
 
