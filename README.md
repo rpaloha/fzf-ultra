@@ -67,6 +67,27 @@ install -Dm755 examples/fzf-ultra-videos ~/.local/bin/fzf-ultra-videos
 The default folder is `~/Videos`. To use another folder, pass it as the first
 argument, for example `~/.local/bin/fzf-ultra-videos "$HOME/Movies"`.
 
+## Desktop theme picker
+
+If you already have a script that applies a desktop theme by name, use
+`fzf-ultra` to select the theme. Save this example as
+`~/.local/bin/pick-theme` and adjust the names and script path to match
+your setup.
+
+```sh
+#!/bin/sh
+theme=$(printf '%s\n' arch-stone mango-grove cosmos |
+    "$HOME/.local/bin/fzf-ultra" --dmenu --placeholder 'Desktop theme') || exit 0
+exec "$HOME/.config/theme-switcher/switch-theme.sh" "$theme"
+```
+
+Make it executable with `chmod +x ~/.local/bin/pick-theme`. To open it with
+Super+T on MangoWC, add the following binding with your own home directory.
+
+```ini
+bind=SUPER,t,spawn,/home/YOUR_USER/.local/bin/pick-theme
+```
+
 ## Keyboard shortcuts
 
 The launcher has no global shortcut of its own. In your compositor's keybinding
@@ -87,7 +108,7 @@ bind=SUPER,space,spawn,/home/YOUR_USER/.local/bin/fzf-ultra toggle
 bind=ALT,v,spawn,/home/YOUR_USER/.local/bin/fzf-ultra-videos
 ```
 
-Both commands also work from a terminal in the Wayland session.
+These commands also work from a terminal in the Wayland session.
 
 ## License
 
