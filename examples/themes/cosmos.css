@@ -1,0 +1,74 @@
+* {
+  font-family: "Adwaita Sans", sans-serif;
+  color: #dcefe9;
+}
+
+.launcher-window {
+  background: transparent;
+}
+
+.launcher {
+  padding: 10px;
+  border: 1px solid rgba(133, 228, 211, 0.34);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(16, 33, 45, 0.9), rgba(7, 20, 29, 0.9));
+}
+
+.search {
+  min-height: 46px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 21px;
+  caret-color: #85e4d3;
+}
+
+.search selection { background-color: #315064; }
+
+.search:focus {
+  border-color: rgba(133, 228, 211, 0.5);
+}
+
+.results {
+  margin-top: 9px;
+  background: transparent;
+}
+
+.result-row {
+  min-height: 36px;
+  margin: 2px 0;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.result-row:selected {
+  border-color: rgba(133, 228, 211, 0.3);
+  background: linear-gradient(100deg, rgba(32, 72, 83, 0.94), rgba(24, 49, 64, 0.94));
+}
+
+.app-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.app-description {
+  color: #9aa5b8;
+  font-size: 13px;
+}
+
+.footer {
+  margin: 8px 4px 1px;
+  color: #8992a5;
+  font-size: 12px;
+}
+
+.no-results {
+  padding: 24px;
+  color: #8992a5;
+  font-size: 16px;
+}
+
+scrollbar { opacity: 0; }

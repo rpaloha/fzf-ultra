@@ -88,6 +88,23 @@ Super+T on MangoWC, add the following binding with your own home directory.
 bind=SUPER,t,spawn,/home/YOUR_USER/.local/bin/pick-theme
 ```
 
+### Matching launcher colors
+
+The [example palettes](examples/themes) include Arch Stone, Mango Grove, and
+Cosmos. Each has a slightly translucent panel. From the repository root,
+install a palette and reload the launcher by restarting its user service.
+
+```sh
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/fzf-ultra"
+install -Dm644 examples/themes/cosmos.css "$config_dir/style.css"
+systemctl --user restart fzf-ultra.service
+```
+
+If you start the daemon manually, restart that process instead. To apply the
+matching launcher colors automatically, run the same copy and restart from
+your theme script after applying the desktop theme. Use the selected theme
+name as the CSS filename.
+
 ## Keyboard shortcuts
 
 The launcher has no global shortcut of its own. In your compositor's keybinding
