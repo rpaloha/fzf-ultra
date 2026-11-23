@@ -67,6 +67,33 @@ install -Dm755 examples/fzf-ultra-videos ~/.local/bin/fzf-ultra-videos
 The default folder is `~/Videos`. To use another folder, pass it as the first
 argument, for example `~/.local/bin/fzf-ultra-videos "$HOME/Movies"`.
 
+## Internet radio with mpv
+
+The [Rust radio example](examples/fzf-ultra-radio.rs) uses the launcher to pick
+a station and mpv to play it. It requires Rust 1.89 or later to build, and
+`fzf-ultra` and `mpv` on your PATH at runtime.
+
+```sh
+mkdir -p ~/.local/bin
+rustc --edition 2024 -O examples/fzf-ultra-radio.rs -o ~/.local/bin/fzf-ultra-radio
+```
+
+Create `~/.config/fzf-ultra/stations.csv` (or use `$XDG_CONFIG_HOME` if set).
+Use one station per line, with no header. Replace the example URLs with your
+stream URLs. Fields use plain commas as separators, without CSV quoting.
+The optional third field is the full name of an existing mpv profile.
+
+```text
+Station A,https://example.org/station-a
+Station B,https://example.org/station-b
+```
+
+Run `~/.local/bin/fzf-ultra-radio` to open the picker. Choose another station
+to switch streams or select the current station again to stop it. You can also
+choose **Stop radio** or run `~/.local/bin/fzf-ultra-radio --stop`. The example
+uses a dedicated mpv socket in `$XDG_RUNTIME_DIR` and the session's usual
+audio output.
+
 ## Desktop theme picker
 
 If you already have a script that applies a desktop theme by name, use
